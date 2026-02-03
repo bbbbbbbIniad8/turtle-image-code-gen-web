@@ -1,10 +1,4 @@
-const copyToClipboard = async (text: string) => {
-try {
-await navigator.clipboard.writeText(text);
-} catch (err) {
-console.error('コピー失敗', err);
-}
-};
+
 
 const adjustSize = (maxSize: number, width: number, height: number): [number, number] => {
 const ratio = Math.min(maxSize / width, maxSize / height);
@@ -41,4 +35,4 @@ return new Promise((resolve, reject) => {
 });
 }
 
-export {copyToClipboard, adjustSize, exportImageData, loadImage}
+export {adjustSize, exportImageData, loadImage}
