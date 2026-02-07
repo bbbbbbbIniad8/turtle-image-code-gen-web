@@ -9,30 +9,26 @@ return [
 }
 
 const rgbToHex = (r: number, g: number, b: number): string => {
-const toHex = (c: number) => c.toString(16).padStart(2, '0');
-return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    const toHex = (c: number) => c.toString(16).padStart(2, '0');
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
-const exportImageData = (data: ImageDataArray, canvas: HTMLCanvasElement) =>{
-const result = []
-for (let i = 0; i < data.length; i += 4) {
-    
-    result.push(`"${rgbToHex(data[i], data[i+1], data[i+2])}"`);
-    };
-
-result.push(`[${[canvas.width, canvas.height]}]`);
-return `[${result}]`
-
+const exportImageData = (data: ImageDataArray, canvas: HTMLCanvasElement): [string[], number[]] =>{
+    const result = [];
+    for (let i = 0; i < data.length; i += 4) {
+        result.push(`"${rgbToHex(data[i], data[i+1], data[i+2])}"`);
+        };
+    return [result, [canvas.width, canvas.height]]
 }
 
 function loadImage(src: string): Promise<HTMLImageElement> {
-return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-    
-});
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+        
+    });
 }
 
 export {adjustSize, exportImageData, loadImage}

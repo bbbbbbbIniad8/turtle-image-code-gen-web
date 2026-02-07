@@ -1,4 +1,4 @@
-const turtle_code_first = (data: string)=>{
+const turtle_code_first = (data: string[], size: number[])=>{
     const code = 
 `
 import turtle
@@ -7,9 +7,9 @@ import math
 class TurtlePrint:
     def __init__(self, image_data, scale):
         self.first_pos = turtle.pos()
-        self.image_data = image_data[:-1]
-        self.width, self.height = image_data[-1]
-        self.pensize = scale + 1
+        self.image_data = image_data["image_data"]
+        self.width, self.height = image_data["size"]
+        self.pensize = scale
 
     def turtle_prepare(self):
         turtle.speed('fastest')
@@ -31,6 +31,7 @@ class TurtlePrint:
         turtle.left(-90)
         turtle.forward(self.width*self.pensize)
         turtle.left(-180)
+        turtle.pendown()
 
     def turtle_return(self):
         turtle.penup()
@@ -40,15 +41,15 @@ class TurtlePrint:
 
     def run(self):
         self.turtle_prepare()
-        for i in range(len(self.image_data)):
-            if i != 0 and i % self.width == 0:
+        for count, element in enumerate(self.image_data):
+            if count != 0 and count % self.width == 0:
                 self.turtle_move_nextline()
-            turtle.pendown()
-            turtle.pencolor(self.image_data[i])
+            turtle.pencolor(element)
             turtle.forward(self.pensize)
         self.turtle_return()
 
-image = ${data}
+image = {"image_data": [${data}],
+        "size": [${size}]}
 `
     return code
   

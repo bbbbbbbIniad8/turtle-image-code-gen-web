@@ -34,8 +34,8 @@ export default function GifCreator() {
       const ctx = canvas.getContext("2d", { willReadFrequently: true })!;
       ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
       const imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const processedData = exportImageData(imagedata.data, canvas);
-      setCreatedCodeFirst(turtle_code_first(processedData));
+      const [processedData, processedSize] = exportImageData(imagedata.data, canvas);
+      setCreatedCodeFirst(turtle_code_first(processedData, processedSize));
       setLastUpdated(new Date().toLocaleTimeString('ja-JP', timeOptions))
     } catch (error) {
       console.log("GIF生成エラー:", error);
@@ -150,7 +150,7 @@ export default function GifCreator() {
 
             <div className="text-xs pb-3">解像度を上げると画像をより精密に描画できますが、描画までの処理時間が長くなります。</div>
             <div className="flex flex-row justify-center items-center" >
-              <CustomSelect labelText="描画倍率" elementName="penSize" defaultVal={penSize} optionLst={[1, 2, 3, 4, 5]}
+              <CustomSelect labelText="描画倍率" elementName="penSize" defaultVal={penSize} optionLst={[1, 2, 3, 4, 5, 6]}
               handleEvent={e => {setPenSize(Number(e.target.value));
                                  setLastUpdated(new Date().toLocaleTimeString('ja-JP', timeOptions));}}/>
             </div>
