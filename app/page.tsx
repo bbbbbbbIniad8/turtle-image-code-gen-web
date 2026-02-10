@@ -102,7 +102,7 @@ export default function GifCreator() {
   return (
     <div className="text-center flex flex-col items-center">
       <h1 className="pt-10 pb-5 font-semibold w-screen text-4xl
-      orange-500 text-white bg-green-500">画像出力亀さん</h1>
+      orange-500 text-white bg-green-500">画像出力亀さんの巣</h1>
       <div className="py-2 border-b w-2/2 mb-5 bg-amber-200">
         INIADが提供している
         <CustomLink url="https://webterm-moocs.iniad.org/turtle.html">Turtle Graphicsをブラウザで動かせるサイト</CustomLink>
